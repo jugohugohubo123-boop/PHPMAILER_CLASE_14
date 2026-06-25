@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var string $status
+ * @var string $mensajeEstado
+ */
+$status = $status ?? 'error';
+$mensajeEstado = $mensajeEstado ?? 'No se pudo determinar el estado.';
+?>
 <!DOCTYPE html>
 <html lang="es">
 

@@ -5,9 +5,19 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
 class CorreoModel {
-    public function sendEmail($correo, $asunto, $mensaje, $adjunto = null) {
+    /**
+     * Envía un correo electrónico con archivos adjuntos.
+     *
+     * @param string $correo
+     * @param string $asunto
+     * @param string $mensaje
+     * @param array|null $adjunto
+     * @return bool|string
+     */
+    public function sendEmail(string $correo, string $asunto, string $mensaje, ?array $adjunto = null) {
+        $mail = null;
         try {
-           $mail = new PHPMailer(true);
+            $mail = new PHPMailer(true);
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
@@ -56,8 +66,8 @@ class CorreoModel {
 
             return $mail->send();
 
-    }catch (\throwable $th) {
-            return $mail->ErrorInfo . " | " . $th->getMessage();
+    }catch (\Throwable $th) {
+            return ($mail ? $mail->ErrorInfo : 'Error de inicialización') . " | " . $th->getMessage();
         }
     }
 }
